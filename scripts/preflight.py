@@ -52,8 +52,11 @@ async def run_preflight_checks() -> dict:
 
     # ── Check 1: SQLite ──────────────────────────────────────────────────
     try:
-        from database import SessionLocal
+        from database import SessionLocal, engine, Base
         from models.cache import CacheEntry
+
+        # Create all tables if they don't exist (needed on Render's ephemeral filesystem)
+        Base.metadata.create_all(bind=engine)
 
         db = SessionLocal()
         # Simple query to verify table exists and DB is reachable
@@ -64,6 +67,8 @@ async def run_preflight_checks() -> dict:
     except Exception as e:
         results["sqlite"] = f"error: {str(e)}"
         logger.error(f"❌ SQLite check failed: {e}")
+
+    
 
     # ── Check 2: API Keys presence ───────────────────────────────────────
     key_checks = {

@@ -31,6 +31,7 @@ google-generativeai==0.5.4
 # Speech-to-text — Whisper (install from GitHub, not PyPI)
 # The PyPI version 20231117 uses an old setup.py that breaks on Render.
 # Installing from GitHub uses the modern build system and avoids this.
+numpy==1.26.4
 git+https://github.com/openai/whisper.git
 torch==2.2.2
 torchaudio==2.2.2
