@@ -14,7 +14,7 @@ from schemas.services import (
 from schemas.location import get_state_code
 from services.fallback_orchestrator import (
     fetch_services, build_service_result, build_hospital_result,
-    load_trauma_centres
+    load_trauma_centres, enrich_with_phones
 )
 from services import google_places
 from utils.geo import haversine_distance, estimate_drive_time
@@ -45,17 +45,12 @@ async def get_police(
     raw_results, data_source = await fetch_services(
         "police", lat, lng, radius, limit, db, state_code)
         
+    if data_source == "google_places":
+        raw_results = await enrich_with_phones(raw_results, "police", limit=3)
+        
     results = [build_service_result(r, lat, lng, data_source, state_code)
                for r in raw_results]
                
-    # Fetch phone for top 3 results if missing and source is google_places
-    if data_source == "google_places":
-        for i, res in enumerate(results[:3]):
-            if not res.phone and res.id:
-                phone = await google_places.get_place_phone(res.id)
-                if phone:
-                    res.phone = phone
-                    
     results.sort(key=lambda x: x.distance_m)
     
     return ServiceListResponse(
@@ -93,15 +88,11 @@ async def get_hospitals(
     raw_results, data_source = await fetch_services(
         "hospital", lat, lng, radius, limit, db, state_code)
         
+    if data_source == "google_places":
+        raw_results = await enrich_with_phones(raw_results, "hospital", limit=3)
+        
     live_results = [build_hospital_result(r, lat, lng, data_source, state_code)
                     for r in raw_results]
-                    
-    if data_source == "google_places":
-        for i, res in enumerate(live_results[:3]):
-            if not res.phone and res.id:
-                phone = await google_places.get_place_phone(res.id)
-                if phone:
-                    res.phone = phone
                     
     curated_ids = {t.id for t in trauma_centres}
     live_results = [r for r in live_results if r.id not in curated_ids]
@@ -152,6 +143,9 @@ async def get_ambulances(
     raw_results, data_source = await fetch_services(
         "ambulance", lat, lng, radius, limit - 1, db, state_code)
         
+    if data_source == "google_places":
+        raw_results = await enrich_with_phones(raw_results, "ambulance", limit=3)
+        
     live_results = []
     for r in raw_results:
         base_res = build_service_result(r, lat, lng, data_source, state_code).model_dump()
@@ -193,6 +187,9 @@ async def get_towing(
     raw_results, data_source = await fetch_services(
         "towing", lat, lng, radius, limit, db, state_code)
         
+    if data_source == "google_places":
+        raw_results = await enrich_with_phones(raw_results, "towing", limit=3)
+        
     results = []
     for r in raw_results:
         base_res = build_service_result(r, lat, lng, data_source, state_code).model_dump()
@@ -225,6 +222,9 @@ async def get_mechanics(
     state_code = validate_region(lat, lng)
     raw_results, data_source = await fetch_services(
         "mechanic", lat, lng, radius, limit, db, state_code)
+        
+    if data_source == "google_places":
+        raw_results = await enrich_with_phones(raw_results, "mechanic", limit=3)
         
     filtered_results = raw_results
     if service != "all":
@@ -306,6 +306,9 @@ async def get_nearby(
         raw_res, source = response
         if source != "unavailable":
             sources.append(source)
+            
+        if source == "google_places":
+            raw_res = await enrich_with_phones(raw_res, cat, limit=3)
             
         if cat == "police":
             results.police = [build_service_result(r, lat, lng, source, state_code) for r in raw_res]

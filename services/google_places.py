@@ -62,7 +62,8 @@ async def search_nearby(category: str, lat: float, lng: float, radius: int = 500
         logger.warning(f"Google Places failed for {category} at {lat},{lng}: {e}")
         raise
 
-async def get_place_phone(place_id: str) -> Optional[str]:
+def get_place_phone(place_id: str) -> Optional[str]:
+    import httpx
     if not settings.GOOGLE_PLACES_API_KEY:
         return None
         
@@ -74,8 +75,8 @@ async def get_place_phone(place_id: str) -> Optional[str]:
     }
     
     try:
-        async with httpx.AsyncClient() as client:
-            response = await client.get(url, params=params)
+        with httpx.Client(timeout=5.0) as client:
+            response = client.get(url, params=params)
             response.raise_for_status()
             data = response.json()
             return data.get("result", {}).get("formatted_phone_number")

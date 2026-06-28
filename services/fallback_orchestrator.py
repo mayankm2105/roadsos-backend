@@ -141,3 +141,52 @@ def load_trauma_centres(user_lat: float, user_lng: float) -> List[HospitalResult
     except Exception as e:
         logger.error(f"Failed to load trauma centres: {e}")
         return []
+
+async def enrich_with_phones(
+    results: list,
+    category: str,
+    limit: int = 3
+) -> list:
+    """
+    Fetch phone numbers for top N results using Place Details API.
+    Only enriches results that have a Google place_id (source="google_places").
+    Results from Overpass/cache won't have place_id — skip those.
+    Runs fetches concurrently using asyncio.gather().
+    Never raises — if phone fetch fails, leave phone as None.
+    """
+    import asyncio
+    from services.google_places import get_place_phone
+    
+    results_to_enrich = [
+        r for r in results[:limit] 
+        if r.get("id") and not r["id"].startswith("osm_")
+           and not r["id"].startswith("cache_")
+           and not r["id"].startswith("helpline_")
+    ]
+    
+    async def fetch_phone(result):
+        try:
+            phone = await asyncio.to_thread(
+                get_place_phone, 
+                result["id"]  # this is the Google place_id
+            )
+            if phone:
+                result["phone"] = phone
+        except Exception:
+            pass  # phone is optional, never crash
+        return result
+    
+    # Fetch phones concurrently for top results
+    enriched = await asyncio.gather(
+        *[fetch_phone(r) for r in results_to_enrich],
+        return_exceptions=True
+    )
+    
+    # Update original results with enriched phone data
+    enriched_ids = {r["id"]: r for r in enriched 
+                    if isinstance(r, dict)}
+    for i, result in enumerate(results):
+        if result.get("id") in enriched_ids:
+            results[i] = enriched_ids[result["id"]]
+    
+    return results
