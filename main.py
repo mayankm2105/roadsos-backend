@@ -94,12 +94,17 @@ app.add_middleware(SecurityHeadersMiddleware)
 # 3. CORS (must come AFTER security headers middleware)
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=settings.cors_origins_list,
-    allow_origin_regex=r"https://.*\.vercel\.app",
+    allow_origins=[
+        "https://roadsos-frontend-orpin.vercel.app",
+        "https://roadsos.vercel.app",
+        "http://localhost:5173",
+        "http://localhost:3000",
+        "http://localhost:8000",
+    ],
     allow_credentials=True,
-    allow_methods=["GET", "POST", "PATCH", "DELETE", "OPTIONS"],
+    allow_methods=["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
     allow_headers=["*"],
-    expose_headers=["X-RoadSoS-Version", "Retry-After"]
+    expose_headers=["*"],
 )
 
 
