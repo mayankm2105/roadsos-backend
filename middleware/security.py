@@ -1,3 +1,4 @@
+from typing import Type, Set
 """
 Security headers middleware for RoadSoS.
 

@@ -97,7 +97,7 @@ def build_hospital_result(
     is_trauma = any(kw in name_lower for kw in TRAUMA_KEYWORDS)
     
     return HospitalResult(
-        **base.dict(),
+        **base.model_dump(),
         has_emergency=True,
         verified_trauma_centre=False,
         trauma_verification_method="keyword_match" if is_trauma else None,

@@ -2,7 +2,7 @@ import json
 import re
 import uuid
 from datetime import datetime
-from typing import Optional
+from typing import Optional, Type
 from urllib.parse import quote
 import google.generativeai as genai
 from config import settings

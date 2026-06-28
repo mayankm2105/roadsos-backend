@@ -1,3 +1,4 @@
+from __future__ import annotations
 import google.generativeai as genai
 from typing import Optional
 from config import settings

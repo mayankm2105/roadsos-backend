@@ -154,7 +154,7 @@ async def get_ambulances(
         
     live_results = []
     for r in raw_results:
-        base_res = build_service_result(r, lat, lng, data_source, state_code).dict()
+        base_res = build_service_result(r, lat, lng, data_source, state_code).model_dump()
         live_results.append(AmbulanceResult(
             **base_res,
             ambulance_type="private",  # default to private for live search
@@ -195,7 +195,7 @@ async def get_towing(
         
     results = []
     for r in raw_results:
-        base_res = build_service_result(r, lat, lng, data_source, state_code).dict()
+        base_res = build_service_result(r, lat, lng, data_source, state_code).model_dump()
         results.append(TowingResult(
             **base_res,
             is_24x7=False,
@@ -243,7 +243,7 @@ async def get_mechanics(
             
     results = []
     for r in filtered_results:
-        base_res = build_service_result(r, lat, lng, data_source, state_code).dict()
+        base_res = build_service_result(r, lat, lng, data_source, state_code).model_dump()
         
         # detect subtype based on keywords
         name_lower = str(r.get("name", "")).lower()
@@ -314,7 +314,7 @@ async def get_nearby(
         elif cat == "ambulance":
             results.ambulance = [
                 AmbulanceResult(
-                    **build_service_result(r, lat, lng, source, state_code).dict(),
+                    **build_service_result(r, lat, lng, source, state_code).model_dump(),
                     ambulance_type="private",
                     national_helpline="108",
                     response_time_est_min=estimate_drive_time(haversine_distance(lat, lng, r["lat"], r["lng"]))
@@ -323,7 +323,7 @@ async def get_nearby(
         elif cat == "towing":
             results.towing = [
                 TowingResult(
-                    **build_service_result(r, lat, lng, source, state_code).dict(),
+                    **build_service_result(r, lat, lng, source, state_code).model_dump(),
                     is_24x7=False,
                     vehicle_types=["car", "bike", "truck"]
                 ) for r in raw_res
@@ -331,7 +331,7 @@ async def get_nearby(
         elif cat == "mechanic":
             results.mechanic = [
                 MechanicResult(
-                    **build_service_result(r, lat, lng, source, state_code).dict(),
+                    **build_service_result(r, lat, lng, source, state_code).model_dump(),
                     service_subtype=None
                 ) for r in raw_res
             ]

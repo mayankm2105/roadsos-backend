@@ -95,7 +95,7 @@ async def fetch_services_for_intent(
     Uses INTENT_SERVICE_MAP to know which categories to fetch.
     Fetches with: radius=5000, limit=3 (top 3 is enough for chat context).
     Converts raw results to ServiceResult using build_service_result().
-    Returns result as list of dicts (use .dict() on each ServiceResult).
+    Returns result as list of dicts (use .model_dump() on each ServiceResult).
     """
     categories = INTENT_SERVICE_MAP.get(intent, [])
     if not categories:
@@ -109,7 +109,7 @@ async def fetch_services_for_intent(
                 # For hospitals in chat, use trauma centres first
                 trauma = load_trauma_centres(lat, lng)
                 trauma = sorted(trauma, key=lambda x: x.distance_m)[:3]
-                services_dict["hospital"] = [t.dict() for t in trauma]
+                services_dict["hospital"] = [t.model_dump() for t in trauma]
             else:
                 raw, source = await fetch_services(
                     category, lat, lng,
@@ -120,7 +120,7 @@ async def fetch_services_for_intent(
                     build_service_result(r, lat, lng, source, state_code)
                     for r in raw
                 ]
-                services_dict[category] = [r.dict() for r in results]
+                services_dict[category] = [r.model_dump() for r in results]
         except Exception as e:
             logger.warning(f"Service fetch failed for {category}: {e}")
             services_dict[category] = []

@@ -1,3 +1,4 @@
+from __future__ import annotations
 import asyncio
 import uuid
 from datetime import datetime
@@ -58,7 +59,7 @@ async def build_triage_emergency_services(
                 db=db, state_code=state_code
             )
             emergency_services["ambulance"] = [
-                build_service_result(r, lat, lng, src_amb, state_code).dict()
+                build_service_result(r, lat, lng, src_amb, state_code).model_dump()
                 for r in raw_amb
             ]
 
@@ -82,7 +83,7 @@ async def build_triage_emergency_services(
             trauma_centres, key=lambda x: x.distance_m
         )[:2]
         emergency_services["hospital"] = [
-            t.dict() for t in trauma_centres
+            t.model_dump() for t in trauma_centres
         ]
 
         # Nearest trauma centre (for prominent display)
@@ -97,7 +98,7 @@ async def build_triage_emergency_services(
                 drive_time_min=tc.drive_time_min,
                 verified_trauma_centre=True,
                 maps_url=tc.maps_url
-            ).dict()
+            ).model_dump()
 
     except Exception as e:
         logger.warning(f"Failed to fetch triage emergency services: {e}")

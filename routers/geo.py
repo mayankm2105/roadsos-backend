@@ -200,7 +200,7 @@ async def forward_geocode(
     state_code = results[0].state_code if results else "HR"
     save_geo_cache(
         db, cache_key,
-        {"results": [r.model_dump() if hasattr(r, "model_dump") else r.dict() for r in results]},
+        {"results": [r.model_dump() for r in results]},
         state_code or "HR"
     )
 

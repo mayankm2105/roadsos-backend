@@ -61,7 +61,7 @@ async def snapshot_nearby_services(
         else:
             raw_list, source = raw
             results[cat] = [
-                build_service_result(r, lat, lng, source, state_code).dict()
+                build_service_result(r, lat, lng, source, state_code).model_dump()
                 for r in raw_list
             ]
 
@@ -87,7 +87,7 @@ async def snapshot_nearby_services(
     try:
         trauma = load_trauma_centres(lat, lng)
         trauma_sorted = sorted(trauma, key=lambda x: x.distance_m)[:2]
-        results["hospital"] = [t.dict() for t in trauma_sorted]
+        results["hospital"] = [t.model_dump() for t in trauma_sorted]
     except Exception as e:
         logger.warning(f"Trauma centre load failed for SOS: {e}")
         results["hospital"] = []

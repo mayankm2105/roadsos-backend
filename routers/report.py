@@ -16,6 +16,7 @@ from services.report_service import (
 from services.fallback_orchestrator import fetch_services, build_service_result
 from schemas.location import get_state_code
 from utils.logger import get_logger
+from typing import Optional, List, Generator
 
 router = APIRouter(tags=["FIR Report Generator"])
 logger = get_logger(__name__)
@@ -158,7 +159,7 @@ async def generate_report(
         nearest_police_station=fir_draft.nearest_police_station,
         reporting_person_name=fir_draft.reporting_person,
         reporting_person_phone=fir_draft.contact,
-        fir_json=fir_draft.dict(),
+        fir_json=fir_draft.model_dump(),
         download_text=download_text,
         whatsapp_url=whatsapp_url,
         lang=request.lang
