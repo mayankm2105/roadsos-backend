@@ -1,0 +1,20 @@
+{
+  "lang": "hw",
+  "strings": {
+    "sos_button": "आपातकाल",
+    "find_ambulance": "एम्बुलेंस ढूंढो",
+    "find_police": "पुलिस ढूंढो",
+    "find_hospital": "अस्पताल ढूंढो",
+    "chatbot_placeholder": "बात करो या लिखो...",
+    "calling": "फ़ोन लगा रिया सै...",
+    "offline_mode": "नेट नहीं सै — पुराना डेटा दिखा रिया सै",
+    "emergency_severity_critical": "🚨 बहुत गंभीर: फ़ौरन ट्रॉमा सेंटर जा",
+    "ambulance_helpline": "108 (एम्बुलेंस)",
+    "police_helpline": "100 (पुलिस)",
+    "language_english": "English",
+    "language_hindi": "हिन्दी",
+    "language_punjabi": "ਪੰਜਾਬੀ",
+    "language_haryanvi": "हरियाणवी",
+    "powered_by": "RoadSoS द्वारा"
+  }
+}

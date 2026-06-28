@@ -1,0 +1,124 @@
+{
+  "verified_trauma_centres": [
+    {
+      "id": "trauma_aiims_delhi",
+      "name": "AIIMS Delhi Trauma Centre",
+      "phone": "+91-11-26588500",
+      "address": "Ansari Nagar, New Delhi 110029",
+      "lat": 28.5684,
+      "lng": 77.1932,
+      "state": "DL",
+      "bed_type": "government"
+    },
+    {
+      "id": "trauma_rml_delhi",
+      "name": "RML Hospital Emergency & Trauma",
+      "phone": "+91-11-23365525",
+      "address": "Baba Kharak Singh Marg, New Delhi 110001",
+      "lat": 28.6360,
+      "lng": 77.2055,
+      "state": "DL",
+      "bed_type": "government"
+    },
+    {
+      "id": "trauma_safdarjung",
+      "name": "Safdarjung Hospital Trauma Unit",
+      "phone": "+91-11-26163060",
+      "address": "Safdarjung, New Delhi 110029",
+      "lat": 28.5724,
+      "lng": 77.1745,
+      "state": "DL",
+      "bed_type": "government"
+    },
+    {
+      "id": "trauma_apollo_delhi",
+      "name": "Apollo Hospital Delhi Trauma",
+      "phone": "+91-11-28644444",
+      "address": "Sarita Vihar, New Delhi 110076",
+      "lat": 28.5245,
+      "lng": 77.2514,
+      "state": "DL",
+      "bed_type": "private"
+    },
+    {
+      "id": "trauma_fortis_delhi",
+      "name": "Fortis Escorts Heart Institute Trauma",
+      "phone": "+91-11-42244444",
+      "address": "Nehru Place, New Delhi 110019",
+      "lat": 28.5494,
+      "lng": 77.2540,
+      "state": "DL",
+      "bed_type": "private"
+    },
+    {
+      "id": "trauma_max_saket",
+      "name": "Max Super Speciality Hospital Trauma",
+      "phone": "+91-11-40903333",
+      "address": "Press Enclave, Saket, New Delhi 110017",
+      "lat": 28.5245,
+      "lng": 77.1878,
+      "state": "DL",
+      "bed_type": "private"
+    },
+    {
+      "id": "trauma_lnjp_delhi",
+      "name": "LNJP Hospital Trauma Centre",
+      "phone": "+91-11-23232400",
+      "address": "Jawaharlal Nehru Marg, New Delhi 110002",
+      "lat": 28.6437,
+      "lng": 77.2408,
+      "state": "DL",
+      "bed_type": "government"
+    },
+    {
+      "id": "trauma_gtb_delhi",
+      "name": "GTB Hospital Trauma Centre",
+      "phone": "+91-11-22590370",
+      "address": "Dilshad Garden, Delhi 110095",
+      "lat": 28.6821,
+      "lng": 77.3145,
+      "state": "DL",
+      "bed_type": "government"
+    },
+    {
+      "id": "trauma_pgims_rohtak",
+      "name": "PGIMS Rohtak Trauma Centre",
+      "phone": "+91-1262-211307",
+      "address": "Rohtak Medical College Road, Rohtak 124001",
+      "lat": 28.8920,
+      "lng": 76.5967,
+      "state": "HR",
+      "bed_type": "government"
+    },
+    {
+      "id": "trauma_kalpana_karnal",
+      "name": "Kalpana Chawla Govt Medical College Trauma",
+      "phone": "+91-184-2260020",
+      "address": "Model Town, Karnal, Haryana 132001",
+      "lat": 29.6857,
+      "lng": 76.9905,
+      "state": "HR",
+      "bed_type": "government"
+    },
+    {
+      "id": "trauma_bps_sonipat",
+      "name": "BPS Govt Medical College Trauma (Women)",
+      "phone": "+91-130-2247001",
+      "address": "Khanpur Kalan, Sonipat, Haryana 131305",
+      "lat": 29.0294,
+      "lng": 76.8928,
+      "state": "HR",
+      "bed_type": "government"
+    },
+    {
+      "id": "trauma_civil_hospital_panipat",
+      "name": "Civil Hospital Panipat Emergency",
+      "phone": "+91-180-2637400",
+      "address": "Civil Lines, Panipat, Haryana 132103",
+      "lat": 29.3867,
+      "lng": 76.9632,
+      "state": "HR",
+      "bed_type": "government"
+    }
+  ]
+}

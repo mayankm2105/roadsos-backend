@@ -1,0 +1,12 @@
+.env
+__pycache__/
+*.py[cod]
+*.db
+*.sqlite
+data/roadsos_cache.db
+data/uploads/
+.venv/
+venv/
+dist/
+*.egg-info/
+.DS_Store

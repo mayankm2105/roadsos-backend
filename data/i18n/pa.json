@@ -1,0 +1,22 @@
+{
+  "lang": "pa",
+  "strings": {
+    "sos_button": "ਐਮਰਜੈਂਸੀ",
+    "find_ambulance": "ਐਂਬੂਲੈਂਸ ਲੱਭੋ",
+    "find_police": "ਪੁਲਿਸ ਲੱਭੋ",
+    "find_hospital": "ਹਸਪਤਾਲ ਲੱਭੋ",
+    "find_towing": "ਟੋਇੰਗ ਲੱਭੋ",
+    "find_mechanic": "ਮਕੈਨਿਕ ਲੱਭੋ",
+    "chatbot_placeholder": "ਇੱਥੇ ਟਾਈਪ ਕਰੋ ਜਾਂ ਬੋਲੋ...",
+    "calling": "ਕਾਲ ਹੋ ਰਹੀ ਹੈ...",
+    "offline_mode": "ਤੁਸੀਂ ਆਫ਼ਲਾਈਨ ਹੋ — ਕੈਸ਼ ਡੇਟਾ ਦਿਖਾ ਰਿਹਾ ਹੈ",
+    "emergency_severity_critical": "🚨 ਗੰਭੀਰ: ਤੁਰੰਤ ਟਰਾਮਾ ਸੈਂਟਰ ਜਾਓ",
+    "ambulance_helpline": "108 (ਐਂਬੂਲੈਂਸ)",
+    "police_helpline": "100 (ਪੁਲਿਸ)",
+    "language_english": "English",
+    "language_hindi": "हिन्दी",
+    "language_punjabi": "ਪੰਜਾਬੀ",
+    "language_haryanvi": "हरियाणवी",
+    "powered_by": "RoadSoS ਦੁਆਰਾ"
+  }
+}
